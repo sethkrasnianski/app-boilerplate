@@ -1,0 +1,30 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+  api:
+    tty: true
+    stdin_open: true
+    build: 
+      context: ./api
+    command: bash -lc "(rm -rf tmp/pids/ || true) && bundle exec rails server -p 3003 --binding 0.0.0.0"
+    volumes:
+      - ./api:/api
+    ports:
+      - "3003:3003"
+    depends_on:
+      - db
+  web:
+    tty: true
+    stdin_open: true
+    build: 
+      context: ./web
+    command: yarn start
+    volumes:
+      - ./web:/web
+    ports:
+      - "3004:3004"
+      - "35729:35729"
+

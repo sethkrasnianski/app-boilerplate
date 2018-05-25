@@ -1,0 +1,13 @@
+AllCops:
+
+  Exclude:
+    - 'db/migrate/*.rb'
+    - 'db/schema.rb'
+    - 'gems/**/*'
+    - 'Rakefile'
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
